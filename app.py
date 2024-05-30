@@ -4,7 +4,7 @@ import pickle
 import sklearn
 
 from joblib import load
-model = load('final_model_banking.joblib')
+model = load('data/final_model_banking.joblib')
 
 
 # Title
