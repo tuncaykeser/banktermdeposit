@@ -38,15 +38,18 @@ poutcome = st.selectbox('Previous Campaign Outcome', ['failure', 'nonexistent', 
 
 # Predict button
 if st.button('Predict 🔮'):
-    # Convert features into DataFrame for prediction
-    input_data = {
-        'age': [age], 'job': [job], 'marital': [marital], 'education': [education],
-        'default': [default], 'housing': [housing], 'loan': [loan], 'contact': [contact],
-        'month': [month], 'day_of_week': [day_of_week], 'duration': [duration],
-        'campaign': [campaign], 'pdays': [pdays], 'previous': [previous], 'poutcome': [poutcome]
-    }
-    df = pd.DataFrame.from_dict(input_data)
-    # Assuming model is loaded and ready to predict
-    prediction = model.predict(df)
-    result = "will subscribe" if prediction[0] == 1 else "will not subscribe"
-    st.write(f'Prediction: {result}')
+    try:
+        # Convert features into DataFrame for prediction
+        input_data = {
+            'age': [age], 'job': [job], 'marital': [marital], 'education': [education],
+            'default': [default], 'housing': [housing], 'loan': [loan], 'contact': [contact],
+            'month': [month], 'day_of_week': [day_of_week], 'duration': [duration],
+            'campaign': [campaign], 'pdays': [pdays], 'previous': [previous], 'poutcome': [poutcome]
+        }
+        df = pd.DataFrame.from_dict(input_data)
+        # Assuming model is loaded and ready to predict
+        prediction = model.predict(df)
+        result = "will subscribe" if prediction[0] == 1 else "will not subscribe"
+        st.write(f'Prediction: {result}')
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
